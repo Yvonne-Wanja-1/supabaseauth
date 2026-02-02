@@ -62,29 +62,29 @@ class _SignupScreenState extends State<SignupScreen> {
       await _supabase.auth.signUp(
         email: _emailController.text.trim(),
         password: _passwordController.text,
-        data: {
-          'name': _nameController.text.trim(),
-        },
+        data: {'name': _nameController.text.trim()},
       );
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Account created successfully! Please log in.')),
+          const SnackBar(
+            content: Text('Account created successfully! Please log in.'),
+          ),
         );
         // Navigate to login screen
         context.go('/');
       }
     } on AuthException catch (error) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(error.message)),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(error.message)));
       }
     } catch (error) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('An error occurred: $error')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('An error occurred: $error')));
       }
     } finally {
       if (mounted) {
@@ -93,7 +93,6 @@ class _SignupScreenState extends State<SignupScreen> {
         });
       }
     }
-  }    });
   }
 
   @override
